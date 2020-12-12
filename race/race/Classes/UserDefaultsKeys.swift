@@ -9,8 +9,6 @@
 import Foundation
 
 enum UserDefaultsKeys: String {
-    case userKey = "userKey"
-    case resultsKey = "resultsKey"
+    case userKey /*= "userKey"*/
+    case resultsKey /*= "resultsKey"*/
 }
-
-
