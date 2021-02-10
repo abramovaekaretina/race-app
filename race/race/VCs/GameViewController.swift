@@ -14,6 +14,7 @@ class GameViewController: UIViewController {
     var startPosition = CGPoint(x: 0, y: 0)
     var carImageView: UIImageView!
     var timeScore = 0
+
     @IBOutlet weak var moveToLeftButton: UIButton!
     @IBOutlet weak var moveToRightButton: UIButton!
     @IBOutlet weak var roadImageView: UIImageView!
@@ -22,6 +23,7 @@ class GameViewController: UIViewController {
     @IBOutlet weak var obstacle2ImageView: UIImageView!
     @IBOutlet weak var obstacle3ImageView: UIImageView!
     @IBOutlet weak var obstacle4ImageView: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.userKey.rawValue) as? Data {
@@ -50,6 +52,8 @@ class GameViewController: UIViewController {
 
         roadImageView.contentMode = .scaleAspectFill
         startPosition = self.roadImageView.frame.origin
+        roadImageView.frame.origin = CGPoint(x: 0, y: 0)
+        obstacleView.frame.origin = self.startPosition
         moveRoad()
         self.carImageView = UIImageView()
         self.carImageView.contentMode = .scaleAspectFit
@@ -70,22 +74,26 @@ class GameViewController: UIViewController {
         GameViewController.dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
         print(GameViewController.dateFormatter.string(from: Date()))
     }
+
     func moveRoad() {
         UIView.animate(withDuration: ViewController.user.userSpeedCar, delay: 0, options: [.curveLinear], animations: {
             self.roadImageView.frame.origin = self.view.frame.origin
             self.obstacleView.frame.origin = self.view.frame.origin
-        }) { (_) in
+        }) { (result) in
             self.roadImageView.frame.origin = self.startPosition
             self.obstacleView.frame.origin = self.startPosition
             self.moveRoad()
         }
     }
+
     func moveCarToLeft() {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x -= 10
             if self.carImageView.frame.origin.x == -20 {
                 self.backToMainView()
             }
+        }) { (_) in
+            self.moveCarToLeft()
             let arrayOfObstacleImageView: [UIImageView] = [
                 self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
             ]
@@ -97,16 +105,18 @@ class GameViewController: UIViewController {
             if self.carImageView.frame.intersects(self.obstacle1ImageView.frame) {
                 self.backToMainView()
             }
-        }) { (_) in
-            self.moveCarToLeft()
         }
     }
+
     func moveCarToRight() {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x += 10
             if self.carImageView.frame.origin.x + self.carImageView.frame.width > self.view.frame.width {
                 self.backToMainView()
             }
+        }) { (_) in
+            self.moveCarToRight()
+            //timer
             let arrayOfObstacleImageView: [UIImageView] = [
                 self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
             ]
@@ -115,16 +125,17 @@ class GameViewController: UIViewController {
                     self.backToMainView()
                 }
             }
-        }) { (_) in
-            self.moveCarToRight()
         }
     }
+
     @IBAction func moveToLeftButtonPressed(_ sender: Any) {
         moveCarToLeft()
     }
+
     @IBAction func moveToRightButtonPressed(_ sender: Any) {
         moveCarToRight()
     }
+
     func backToMainView() {
         let newRecord = ResultGame(userName: ViewController.user.userName,
                                    time: GameViewController.dateFormatter.string(from: Date()),

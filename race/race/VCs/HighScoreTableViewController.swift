@@ -12,29 +12,19 @@ class HighScoreTableViewController: UIViewController {
     static var arrayOfResultGame: [ResultGame] = []
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    
+
+    var count = 2
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.resultsKey.rawValue) as? Data {
-            do {
-                let results = try JSONDecoder().decode([ResultGame].self, from: data)
-                HighScoreTableViewController.arrayOfResultGame = results
-            } catch {
-                print(error)
-                HighScoreTableViewController.arrayOfResultGame = [ResultGame]()
-                print("Not found results")
-            }
-        } else {
-            HighScoreTableViewController.arrayOfResultGame = [ResultGame]()
-            print("Not found results")
-        }
         view.backgroundColor = #colorLiteral(red: 0.4707121011, green: 0.561716848, blue: 0.6699119607, alpha: 1)
         tableView.delegate = self
         tableView.dataSource = self
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.isNavigationBarHidden = false
+        navigationController?.setNavigationBarHidden(true, animated: true)
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.userKey.rawValue) as? Data {
             do {
                 let user = try JSONDecoder().decode(User.self, from: data)
@@ -54,12 +44,10 @@ class HighScoreTableViewController: UIViewController {
                                        userSpeedCar: 16)
             print("Not found user")
         }
-//        if let name: String = ViewController.user.userName {
-//            nameLabel.text = name
-//        } else {
-//            nameLabel.text = "alalalalal"
-//        }
-//        nameLabel.text = "alalalalal"
+    }
+
+    @IBAction func backButtonPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -67,6 +55,7 @@ extension HighScoreTableViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return HighScoreTableViewController.arrayOfResultGame.count
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let tableViewCell = UITableViewCell()
         if HighScoreTableViewController.arrayOfResultGame.count != 0 {

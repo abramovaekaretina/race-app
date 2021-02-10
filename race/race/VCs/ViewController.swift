@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var highScorebutton: UIButton!
+    @IBOutlet weak var buttonsView: UIView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let startText = "start"
@@ -32,7 +34,7 @@ class ViewController: UIViewController {
         if let title = highScorebutton.titleLabel {
             title.attributedText = attributedHighScoreText
         }
-        
+
         let settingText = "setting"
         let wholeRangeSettingText = (settingText as NSString).range(of: settingText)
         let attributedSettingText = NSMutableAttributedString(string: settingText)
@@ -48,16 +50,16 @@ class ViewController: UIViewController {
         view.addSubview(startRaceImageView)
         view.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         view.bringSubviewToFront(nameLabel)
-        view.bringSubviewToFront(startButton)
         startButton.backgroundColor = .white
         startButton.layer.cornerRadius = startButton.frame.height / 2
-        view.bringSubviewToFront(highScorebutton)
         settingsButton.backgroundColor = .white
         settingsButton.layer.cornerRadius = settingsButton.frame.height / 2
-        view.bringSubviewToFront(settingsButton)
         highScorebutton.backgroundColor = .white
         highScorebutton.layer.cornerRadius = highScorebutton.frame.height / 2
+        view.bringSubviewToFront(buttonsView)
+
     }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         startButton.getGradient(colors: [#colorLiteral(red: 1, green: 0.5643388629, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 0.397720933, green: 0.6568412781, blue: 0.9055325985, alpha: 1).cgColor],
@@ -77,23 +79,24 @@ class ViewController: UIViewController {
         let nameController = String(describing: GameViewController.self)
         let viewController = storyboard.instantiateViewController(identifier: nameController) as GameViewController
         viewController.modalPresentationStyle = .fullScreen
-//        self.present(viewController, animated: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
+
     @IBAction func settingsbuttonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nameController = String(describing: SettingsViewController.self)
         let viewController = storyboard.instantiateViewController(identifier: nameController) as SettingsViewController
         viewController.modalPresentationStyle = .fullScreen
-//        self.present(viewController, animated: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
+
     @IBAction func highScoreButtonPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nameController = String(describing: HighScoreTableViewController.self)
         let viewController = storyboard.instantiateViewController(identifier: nameController) as HighScoreTableViewController
+        viewController.count = 2
         viewController.modalPresentationStyle = .fullScreen
-//        self.present(viewController, animated: true)
         navigationController?.pushViewController(viewController, animated: true)
     }
+
 }

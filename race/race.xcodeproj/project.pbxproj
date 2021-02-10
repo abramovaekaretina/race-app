@@ -7,18 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B03B38025C31377000A71F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B03B37F25C31376000A71F3 /* Assets.xcassets */; };
 		7B11D0AE255E93FE00568034 /* ResultGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B11D0AD255E93FE00568034 /* ResultGame.swift */; };
 		7B8ABC57251A4A17000DF603 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC56251A4A17000DF603 /* AppDelegate.swift */; };
 		7B8ABC59251A4A17000DF603 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC58251A4A17000DF603 /* SceneDelegate.swift */; };
 		7B8ABC5B251A4A17000DF603 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC5A251A4A17000DF603 /* ViewController.swift */; };
 		7B8ABC5E251A4A17000DF603 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B8ABC5C251A4A17000DF603 /* Main.storyboard */; };
-		7B8ABC60251A4A1F000DF603 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B8ABC5F251A4A1F000DF603 /* Assets.xcassets */; };
 		7B8ABC63251A4A1F000DF603 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B8ABC61251A4A1F000DF603 /* LaunchScreen.storyboard */; };
 		7B8ABC6B251A4AE4000DF603 /* HighScoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC6A251A4AE4000DF603 /* HighScoreTableViewController.swift */; };
 		7B8ABC6D251A4B0C000DF603 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC6C251A4B0C000DF603 /* GameViewController.swift */; };
 		7B8ABC6F251A4B3F000DF603 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */; };
 		7BA7C94125377B8600655C9D /* 19888.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA7C94025377B8600655C9D /* 19888.ttf */; };
 		7BA7C94425377CA900655C9D /* UIFont+AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C94325377CA900655C9D /* UIFont+AppFont.swift */; };
+		7BB8285725C8246200E0ADD9 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8285625C8246200E0ADD9 /* TestViewController.swift */; };
 		7BC7C60A2541E913000F0C63 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C6092541E913000F0C63 /* UserDefaultsKeys.swift */; };
 		7BC7C60E2541EADC000F0C63 /* UserDefault+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C60D2541EADC000F0C63 /* UserDefault+Value.swift */; };
 		7BC7C6392549A4C0000F0C63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C6382549A4BF000F0C63 /* User.swift */; };
@@ -31,13 +32,14 @@
 /* Begin PBXFileReference section */
 		14CAC781C19E1DA1261ECA87 /* Pods_race.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_race.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4B0B69A1AD36201F412CB908 /* Pods-race.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-race.release.xcconfig"; path = "Target Support Files/Pods-race/Pods-race.release.xcconfig"; sourceTree = "<group>"; };
+		7B03B37F25C31376000A71F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B11D0AD255E93FE00568034 /* ResultGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGame.swift; sourceTree = "<group>"; };
+		7B4B422125D179D2006956A6 /* videoFile.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoFile.mp4; sourceTree = "<group>"; };
 		7B8ABC53251A4A17000DF603 /* race.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = race.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8ABC56251A4A17000DF603 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B8ABC58251A4A17000DF603 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7B8ABC5A251A4A17000DF603 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7B8ABC5D251A4A17000DF603 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7B8ABC5F251A4A1F000DF603 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B8ABC62251A4A1F000DF603 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B8ABC64251A4A1F000DF603 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B8ABC6A251A4AE4000DF603 /* HighScoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreTableViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 		7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7BA7C94025377B8600655C9D /* 19888.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 19888.ttf; sourceTree = "<group>"; };
 		7BA7C94325377CA900655C9D /* UIFont+AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFont.swift"; sourceTree = "<group>"; };
+		7BB8285625C8246200E0ADD9 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		7BC7C6092541E913000F0C63 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		7BC7C60D2541EADC000F0C63 /* UserDefault+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Value.swift"; sourceTree = "<group>"; };
 		7BC7C6382549A4BF000F0C63 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 				7B8ABC6A251A4AE4000DF603 /* HighScoreTableViewController.swift */,
 				7B8ABC6C251A4B0C000DF603 /* GameViewController.swift */,
 				7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */,
+				7BB8285625C8246200E0ADD9 /* TestViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -122,11 +126,12 @@
 			children = (
 				7B8ABC56251A4A17000DF603 /* AppDelegate.swift */,
 				7B8ABC58251A4A17000DF603 /* SceneDelegate.swift */,
+				7B4B422125D179D2006956A6 /* videoFile.mp4 */,
 				7B3AC1272580281700A4AB2F /* Extensions */,
 				7B3AC1292580286700A4AB2F /* Classes */,
 				7B3AC1282580284D00A4AB2F /* VCs */,
 				7B8ABC5C251A4A17000DF603 /* Main.storyboard */,
-				7B8ABC5F251A4A1F000DF603 /* Assets.xcassets */,
+				7B03B37F25C31376000A71F3 /* Assets.xcassets */,
 				7BA7C93F25377B6900655C9D /* Resources */,
 				7B8ABC61251A4A1F000DF603 /* LaunchScreen.storyboard */,
 				7B8ABC64251A4A1F000DF603 /* Info.plist */,
@@ -188,7 +193,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Ekaterina Abramova";
 				TargetAttributes = {
 					7B8ABC52251A4A17000DF603 = {
@@ -220,8 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B8ABC63251A4A1F000DF603 /* LaunchScreen.storyboard in Resources */,
-				7B8ABC60251A4A1F000DF603 /* Assets.xcassets in Resources */,
 				7B8ABC5E251A4A17000DF603 /* Main.storyboard in Resources */,
+				7B03B38025C31377000A71F3 /* Assets.xcassets in Resources */,
 				7BA7C94125377B8600655C9D /* 19888.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +290,7 @@
 				7BC7C63C254A077D000F0C63 /* UserDefault+SaveUser.swift in Sources */,
 				7B8ABC5B251A4A17000DF603 /* ViewController.swift in Sources */,
 				7BA7C94425377CA900655C9D /* UIFont+AppFont.swift in Sources */,
+				7BB8285725C8246200E0ADD9 /* TestViewController.swift in Sources */,
 				7B8ABC57251A4A17000DF603 /* AppDelegate.swift in Sources */,
 				7B8ABC59251A4A17000DF603 /* SceneDelegate.swift in Sources */,
 				7B8ABC6F251A4B3F000DF603 /* SettingsViewController.swift in Sources */,
@@ -340,6 +346,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -400,6 +407,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
