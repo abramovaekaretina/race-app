@@ -11,11 +11,10 @@ import UIKit
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var userNameTextField: UITextField!
-    @IBOutlet weak var sendUserNameButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sendUserNameButton.layer.cornerRadius = 5
         if let data = UserDefaults.standard.value(forKey: "UserKey") as? Data {
             do {
                 let user = try JSONDecoder().decode(User.self, from: data)
@@ -33,16 +32,27 @@ class SettingsViewController: UIViewController {
                                        userCarImageName: "red-car-image",
                                        userSpeedCar: 16)
         }
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardDidShow(_:)),
+                                               name: UIResponder.keyboardDidShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(handleKeyboardWillHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     @IBAction func onBackButtonTapped(_ sender: Any) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func selectCarColor() {
+        
     }
 
     @IBAction func selectYellowCarButtonTapped(_ sender: Any) {
@@ -169,7 +179,7 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func selectSlowSpeedButtonTapped(_ sender: Any) {
-        ViewController.user.userSpeedCar = 0.5
+        ViewController.user.userSpeedCar = 16
         do {
             let data = try JSONEncoder().encode(ViewController.user)
             UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
@@ -179,7 +189,7 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func selectNormalSpeedButtonTapped(_ sender: Any) {
-        ViewController.user.userSpeedCar = 0.3
+        ViewController.user.userSpeedCar = 8
         do {
             let data = try JSONEncoder().encode(ViewController.user)
             UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
@@ -189,12 +199,24 @@ class SettingsViewController: UIViewController {
     }
 
     @IBAction func selectFastSpeedButtonTapped(_ sender: Any) {
-        ViewController.user.userSpeedCar = 0.1
+        ViewController.user.userSpeedCar = 4
         do {
             let data = try JSONEncoder().encode(ViewController.user)
             UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
         } catch {
             print(error)
+        }
+    }
+
+    @objc func handleKeyboardWillHide () {
+        scrollView.contentInset = .zero
+    }
+
+    @objc func handleKeyboardDidShow (_ notification: Notification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let bottomInset = keyboardFrame.height
+            let insets = UIEdgeInsets(top: 0, left: 0, bottom: bottomInset, right: 0)
+            scrollView.contentInset = insets
         }
     }
 

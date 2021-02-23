@@ -19,7 +19,7 @@
 		7B8ABC6F251A4B3F000DF603 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */; };
 		7BA7C94125377B8600655C9D /* 19888.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BA7C94025377B8600655C9D /* 19888.ttf */; };
 		7BA7C94425377CA900655C9D /* UIFont+AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA7C94325377CA900655C9D /* UIFont+AppFont.swift */; };
-		7BB8285725C8246200E0ADD9 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB8285625C8246200E0ADD9 /* TestViewController.swift */; };
+		7BC1320625E3F251009F76AB /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC1320525E3F251009F76AB /* GameOverViewController.swift */; };
 		7BC7C60A2541E913000F0C63 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C6092541E913000F0C63 /* UserDefaultsKeys.swift */; };
 		7BC7C60E2541EADC000F0C63 /* UserDefault+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C60D2541EADC000F0C63 /* UserDefault+Value.swift */; };
 		7BC7C6392549A4C0000F0C63 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC7C6382549A4BF000F0C63 /* User.swift */; };
@@ -34,7 +34,6 @@
 		4B0B69A1AD36201F412CB908 /* Pods-race.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-race.release.xcconfig"; path = "Target Support Files/Pods-race/Pods-race.release.xcconfig"; sourceTree = "<group>"; };
 		7B03B37F25C31376000A71F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B11D0AD255E93FE00568034 /* ResultGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultGame.swift; sourceTree = "<group>"; };
-		7B4B422125D179D2006956A6 /* videoFile.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = videoFile.mp4; sourceTree = "<group>"; };
 		7B8ABC53251A4A17000DF603 /* race.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = race.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B8ABC56251A4A17000DF603 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B8ABC58251A4A17000DF603 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,7 +46,7 @@
 		7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		7BA7C94025377B8600655C9D /* 19888.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = 19888.ttf; sourceTree = "<group>"; };
 		7BA7C94325377CA900655C9D /* UIFont+AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+AppFont.swift"; sourceTree = "<group>"; };
-		7BB8285625C8246200E0ADD9 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		7BC1320525E3F251009F76AB /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		7BC7C6092541E913000F0C63 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		7BC7C60D2541EADC000F0C63 /* UserDefault+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefault+Value.swift"; sourceTree = "<group>"; };
 		7BC7C6382549A4BF000F0C63 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -85,10 +84,10 @@
 			isa = PBXGroup;
 			children = (
 				7B8ABC5A251A4A17000DF603 /* ViewController.swift */,
+				7BC1320525E3F251009F76AB /* GameOverViewController.swift */,
 				7B8ABC6A251A4AE4000DF603 /* HighScoreTableViewController.swift */,
 				7B8ABC6C251A4B0C000DF603 /* GameViewController.swift */,
 				7B8ABC6E251A4B3F000DF603 /* SettingsViewController.swift */,
-				7BB8285625C8246200E0ADD9 /* TestViewController.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -126,7 +125,6 @@
 			children = (
 				7B8ABC56251A4A17000DF603 /* AppDelegate.swift */,
 				7B8ABC58251A4A17000DF603 /* SceneDelegate.swift */,
-				7B4B422125D179D2006956A6 /* videoFile.mp4 */,
 				7B3AC1272580281700A4AB2F /* Extensions */,
 				7B3AC1292580286700A4AB2F /* Classes */,
 				7B3AC1282580284D00A4AB2F /* VCs */,
@@ -290,11 +288,11 @@
 				7BC7C63C254A077D000F0C63 /* UserDefault+SaveUser.swift in Sources */,
 				7B8ABC5B251A4A17000DF603 /* ViewController.swift in Sources */,
 				7BA7C94425377CA900655C9D /* UIFont+AppFont.swift in Sources */,
-				7BB8285725C8246200E0ADD9 /* TestViewController.swift in Sources */,
 				7B8ABC57251A4A17000DF603 /* AppDelegate.swift in Sources */,
 				7B8ABC59251A4A17000DF603 /* SceneDelegate.swift in Sources */,
 				7B8ABC6F251A4B3F000DF603 /* SettingsViewController.swift in Sources */,
 				7BC7C6392549A4C0000F0C63 /* User.swift in Sources */,
+				7BC1320625E3F251009F76AB /* GameOverViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

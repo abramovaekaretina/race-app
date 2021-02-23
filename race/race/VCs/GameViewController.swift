@@ -60,6 +60,7 @@ class GameViewController: UIViewController {
         self.carImageView.image = UIImage(named: ViewController.user.userCarImageName)
         self.carImageView.frame.origin = CGPoint(x: 150, y: 578)
         self.carImageView.frame.size = CGSize(width: 103, height: 164)
+        obstacleView.addSubview(carImageView)
         view.addSubview(self.carImageView)
         let arrayOfObstacleImageView: [UIImageView] = [
             obstacle1ImageView, obstacle2ImageView, obstacle3ImageView, obstacle4ImageView
@@ -76,12 +77,42 @@ class GameViewController: UIViewController {
     }
 
     func moveRoad() {
+        var isChash = false
+        let arrayOfObstacleImageView: [UIImageView] = [
+            self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
+        ]
+
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timerForChash) in
+            for obstacle in arrayOfObstacleImageView {
+                if obstacle.frame.intersects(self.carImageView.frame) {
+                    isChash = true
+                    self.backToMainView()
+                }
+                if self.carImageView.frame.intersects(obstacle.frame) {
+                    isChash = true
+                    self.backToMainView()
+                }
+            }
+        }
+    
         UIView.animate(withDuration: ViewController.user.userSpeedCar, delay: 0, options: [.curveLinear], animations: {
             self.roadImageView.frame.origin = self.view.frame.origin
             self.obstacleView.frame.origin = self.view.frame.origin
         }) { (result) in
             self.roadImageView.frame.origin = self.startPosition
             self.obstacleView.frame.origin = self.startPosition
+
+//            let arrayOfObstacleImageView: [UIImageView] = [
+//                self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
+//            ]
+
+//            for obstacle in arrayOfObstacleImageView {
+//                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timerForChash) in
+//                    if self.carImageView.frame.intersects(obstacle.frame) {
+//                        self.backToMainView()
+//                    }
+//                }
+//            }
             self.moveRoad()
         }
     }
@@ -90,46 +121,51 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x -= 10
             if self.carImageView.frame.origin.x == -20 {
-                self.backToMainView()
+                self.showGameOverVC()
             }
         }) { (_) in
             self.moveCarToLeft()
-            let arrayOfObstacleImageView: [UIImageView] = [
-                self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
-            ]
-            for obstacle in arrayOfObstacleImageView {
-                if self.carImageView.frame.intersects(obstacle.frame) {
-                    self.backToMainView()
-                }
-            }
-            if self.carImageView.frame.intersects(self.obstacle1ImageView.frame) {
-                self.backToMainView()
-            }
         }
     }
 
     func moveCarToRight() {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x += 10
-            if self.carImageView.frame.origin.x + self.carImageView.frame.width > self.view.frame.width {
-                self.backToMainView()
+            if (self.carImageView.frame.origin.x + self.carImageView.frame.width > self.view.frame.width) &&
+                (self.carImageView.frame.origin.x + self.carImageView.frame.width < self.view.frame.width + 10) {
+                self.showGameOverVC()
             }
         }) { (_) in
             self.moveCarToRight()
-            //timer
-            let arrayOfObstacleImageView: [UIImageView] = [
-                self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
-            ]
-            for obstacle in arrayOfObstacleImageView {
-                if self.carImageView.frame.intersects(obstacle.frame) {
-                    self.backToMainView()
-                }
-            }
         }
     }
 
     @IBAction func moveToLeftButtonPressed(_ sender: Any) {
         moveCarToLeft()
+    }
+    
+    func saveLastResult() {
+        let newRecord = ResultGame(userName: ViewController.user.userName,
+                                   time: GameViewController.dateFormatter.string(from: Date()),
+                                   score: timeScore)
+        HighScoreTableViewController.arrayOfResultGame.append(newRecord)
+        moveToLeftButton.isSelected = false
+        moveToRightButton.isSelected = false
+        do {
+            let data = try JSONEncoder().encode(HighScoreTableViewController.arrayOfResultGame)
+            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.resultsKey)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func showGameOverVC() {
+        saveLastResult()
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let nameController = String(describing: GameOverViewController.self)
+        let viewController = storyboard.instantiateViewController(identifier: nameController) as GameOverViewController
+        viewController.modalPresentationStyle = .fullScreen
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     @IBAction func moveToRightButtonPressed(_ sender: Any) {

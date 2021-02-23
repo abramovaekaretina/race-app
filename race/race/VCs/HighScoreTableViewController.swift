@@ -62,7 +62,7 @@ extension HighScoreTableViewController: UITableViewDelegate, UITableViewDataSour
             let userName = HighScoreTableViewController.arrayOfResultGame[indexPath.row].userName
             let score = HighScoreTableViewController.arrayOfResultGame[indexPath.row].score
             let time = HighScoreTableViewController.arrayOfResultGame[indexPath.row].time
-            tableViewCell.textLabel?.text = "\(userName),  \(score), (\(time))"
+            tableViewCell.textLabel?.text = "\(userName), \(score), (\(time))"
         } else {
             tableViewCell.textLabel?.text = "Start the game to see the result!"
         }
