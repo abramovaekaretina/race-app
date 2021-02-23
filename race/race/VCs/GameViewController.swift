@@ -48,17 +48,18 @@ class GameViewController: UIViewController {
         roadImageView.contentMode = .scaleAspectFill
         startPosition = self.roadImageView.frame.origin
         roadImageView.frame.origin = CGPoint(x: 0, y: 0)
-        obstacleView.frame.origin = self.startPosition
+//        obstacleView.frame.origin = self.startPosition
         moveRoad()
         createCar()
-        obstacleView.addSubview(carImageView)
+        roadImageView.addSubview(carImageView) //??
+//        obstacleView.addSubview(carImageView)
         view.addSubview(self.carImageView)
-        let arrayOfObstacleImageView: [UIImageView] = [
-            obstacle1ImageView, obstacle2ImageView, obstacle3ImageView, obstacle4ImageView
-        ]
-        arrayOfObstacleImageView.map { (imageView) in
-            imageView.image = UIImage(named: ViewController.user.userObstacleImageName)
-        }
+//        let arrayOfObstacleImageView: [UIImageView] = [
+//            obstacle1ImageView, obstacle2ImageView, obstacle3ImageView, obstacle4ImageView
+//        ]
+//        arrayOfObstacleImageView.map { (imageView) in
+//            imageView.image = UIImage(named: ViewController.user.userObstacleImageName)
+//        }
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
             self.timeScore += 1
         }
@@ -78,8 +79,6 @@ class GameViewController: UIViewController {
         swipeRightGesture.addTarget(self, action: #selector(swipeToMove(_:)))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
-
-        
     }
 
     func createCar() {
@@ -91,30 +90,30 @@ class GameViewController: UIViewController {
     }
 
     func moveRoad() {
-        var isChash = false
-        let arrayOfObstacleImageView: [UIImageView] = [
-            self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
-        ]
+//        var isChash = false
+//        let arrayOfObstacleImageView: [UIImageView] = [
+//            self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
+//        ]
 
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timerForChash) in
-            for obstacle in arrayOfObstacleImageView {
-                if obstacle.frame.intersects(self.carImageView.frame) {
-                    isChash = true
-                    self.backToMainView()
-                }
-                if self.carImageView.frame.intersects(obstacle.frame) {
-                    isChash = true
-                    self.backToMainView()
-                }
-            }
-        }
+//        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timerForChash) in
+//            for obstacle in arrayOfObstacleImageView {
+//                if obstacle.frame.intersects(self.carImageView.frame) {
+//                    isChash = true
+//                    self.backToMainView()
+//                }
+//                if self.carImageView.frame.intersects(obstacle.frame) {
+//                    isChash = true
+//                    self.backToMainView()
+//                }
+//            }
+//        }
 
         UIView.animate(withDuration: ViewController.user.userSpeedCar, delay: 0, options: [.curveLinear], animations: {
             self.roadImageView.frame.origin = self.view.frame.origin
-            self.obstacleView.frame.origin = self.view.frame.origin
+//            self.obstacleView.frame.origin = self.view.frame.origin
         }) { (result) in
             self.roadImageView.frame.origin = self.startPosition
-            self.obstacleView.frame.origin = self.startPosition
+//            self.obstacleView.frame.origin = self.startPosition
             self.moveRoad()
         }
     }

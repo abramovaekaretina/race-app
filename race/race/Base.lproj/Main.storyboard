@@ -404,11 +404,6 @@
                     <connections>
                         <outlet property="moveToLeftButton" destination="n75-o6-lMo" id="yFc-KO-2gc"/>
                         <outlet property="moveToRightButton" destination="kcs-sw-S5o" id="Wb1-jG-Kzb"/>
-                        <outlet property="obstacle1ImageView" destination="FOD-Ib-mMd" id="oGB-dg-gCb"/>
-                        <outlet property="obstacle2ImageView" destination="3Yg-35-weZ" id="Rwv-Zj-sCB"/>
-                        <outlet property="obstacle3ImageView" destination="igt-xC-C9R" id="cvm-qX-bx8"/>
-                        <outlet property="obstacle4ImageView" destination="7gY-Je-EPu" id="UEt-ct-0aX"/>
-                        <outlet property="obstacleView" destination="yHe-n1-boc" id="XOg-FX-Igm"/>
                         <outlet property="roadImageView" destination="vGu-da-QRb" id="8BY-Ge-zWc"/>
                     </connections>
                 </viewController>
