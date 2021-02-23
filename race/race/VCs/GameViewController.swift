@@ -50,7 +50,6 @@ class GameViewController: UIViewController {
         roadImageView.frame.origin = CGPoint(x: 0, y: 0)
         moveRoad()
         createCar()
-//        roadImageView.addSubview(carImageView)
         view.addSubview(carImageView)
         Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (scoreTimer) in
             self.timeScore += 1
@@ -62,28 +61,29 @@ class GameViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let swipeLeftGesture = UISwipeGestureRecognizer()
-        swipeLeftGesture.addTarget(self, action: #selector(swipeToMove(_:)))
-        swipeLeftGesture.direction = .left
-        view.addGestureRecognizer(swipeLeftGesture)
-
-        let swipeRightGesture = UISwipeGestureRecognizer()
-        swipeRightGesture.addTarget(self, action: #selector(swipeToMove(_:)))
-        swipeRightGesture.direction = .right
-        view.addGestureRecognizer(swipeRightGesture)
-
+        addMotionControlSwipes()
         obstacle.image = UIImage(named: ViewController.user.userObstacleImageName)
         obstacle.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
         obstacle.center = CGPoint(x: view.frame.width / .random(in: 1...3), y: 0)
         view.addSubview(obstacle)
         view.bringSubviewToFront(carImageView)
         animateObstacle()
-        checkCrash()
+        checkHit()
     }
 
-    func checkCrash() {
+    func addMotionControlSwipes() {
+        let swipeLeftGesture = UISwipeGestureRecognizer()
+        let swipeRightGesture = UISwipeGestureRecognizer()
+        swipeLeftGesture.addTarget(self, action: #selector(swipeToMove(_:)))
+        swipeRightGesture.addTarget(self, action: #selector(swipeToMove(_:)))
+        swipeLeftGesture.direction = .left
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeLeftGesture)
+        view.addGestureRecognizer(swipeRightGesture)
+    }
+
+    func checkHit() {
         timerForCrash = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timerForCrash) in
-//            self.crash()
             if self.carImageView.frame.intersects(self.obstacle.frame) {
                 self.stopFlag = false
                 timerForCrash.invalidate()
@@ -154,7 +154,7 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x += 10
             if (self.carImageView.frame.origin.x + self.carImageView.frame.width > self.view.frame.width) &&
-                (self.carImageView.frame.origin.x + self.carImageView.frame.width < self.view.frame.width + 10) {
+                (self.carImageView.frame.origin.x + self.carImageView.frame.width < self.view.frame.width + 5) {
                 self.stopFlag = false
                 self.showGameOverVC()
             }
