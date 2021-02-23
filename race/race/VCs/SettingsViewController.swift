@@ -12,9 +12,16 @@ class SettingsViewController: UIViewController {
 
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var colorPickerView: UIPickerView!
+
+    let colors = ["Yellow", "Red", "Green", "Black", "Orange", "Sky", "Purple", "Blue"]
+
+    // MARK: - Lifecycle functions
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        colorPickerView.delegate = self
+        colorPickerView.dataSource = self
         if let data = UserDefaults.standard.value(forKey: "UserKey") as? Data {
             do {
                 let user = try JSONDecoder().decode(User.self, from: data)
@@ -47,122 +54,23 @@ class SettingsViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
+    // MARK: - IBActions
+
     @IBAction func onBackButtonTapped(_ sender: Any) {
+        selectCarColor()
         navigationController?.popViewController(animated: true)
-    }
-    
-    func selectCarColor() {
-        
-    }
-
-    @IBAction func selectYellowCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "yellow-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectRedCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "red-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectOrangeCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "orange-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectGreenCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "green-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectSkyCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "sky-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectPurpleCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "purple-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectBlueCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "blue-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
-    }
-
-    @IBAction func selectBlackCarButtonTapped(_ sender: Any) {
-        ViewController.user.userCarImageName = "black-car-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
     }
 
     @IBAction func setObstacleStubButtonPressed(_ sender: Any) {
-        ViewController.user.userObstacleImageName = "stub-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
+        setObstacle(imageName: "stub-image")
     }
 
     @IBAction func setObstacleRockButtonPressed(_ sender: Any) {
-        ViewController.user.userObstacleImageName = "rock-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
+        setObstacle(imageName: "rock-image")
     }
 
     @IBAction func setObstacleLoguttonPressed(_ sender: Any) {
-        ViewController.user.userObstacleImageName = "log-image"
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
+        setObstacle(imageName: "log-image")
     }
 
     @IBAction func setUserNameButtonPressed(_ sender: Any) {
@@ -180,26 +88,48 @@ class SettingsViewController: UIViewController {
 
     @IBAction func selectSlowSpeedButtonTapped(_ sender: Any) {
         ViewController.user.userSpeedCar = 16
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
+        saveUser()
     }
 
     @IBAction func selectNormalSpeedButtonTapped(_ sender: Any) {
         ViewController.user.userSpeedCar = 8
-        do {
-            let data = try JSONEncoder().encode(ViewController.user)
-            UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
-        } catch {
-            print(error)
-        }
+        saveUser()
     }
 
     @IBAction func selectFastSpeedButtonTapped(_ sender: Any) {
         ViewController.user.userSpeedCar = 4
+        saveUser()
+    }
+
+    // MARK: - Flow functions
+
+    func selectCarColor() {
+        let numberOfSelectedColor = colorPickerView.selectedRow(inComponent: 0)
+        switch numberOfSelectedColor {
+        case 0: setColor(imageName: "yellow-car-image")
+        case 1: setColor(imageName: "red-car-image")
+        case 2: setColor(imageName: "green-car-image")
+        case 3: setColor(imageName: "black-car-image")
+        case 4: setColor(imageName: "orange-car-image")
+        case 5: setColor(imageName: "sky-car-image")
+        case 6: setColor(imageName: "purple-car-image")
+        case 7: setColor(imageName: "blue-car-image")
+        default:
+            print("Select color, please")
+        }
+    }
+
+    func setColor(imageName: String) {
+        ViewController.user.userCarImageName = "\(imageName)"
+        saveUser()
+    }
+
+    func setObstacle(imageName: String) {
+        ViewController.user.userObstacleImageName = "\(imageName)"
+        saveUser()
+    }
+
+    func saveUser() {
         do {
             let data = try JSONEncoder().encode(ViewController.user)
             UserDefaults.standard.setValue(data, forKey: UserDefaultsKeys.userKey)
@@ -220,4 +150,20 @@ class SettingsViewController: UIViewController {
         }
     }
 
+}
+
+// MARK: - Extension UIPickerView
+
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return colors.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(colors[row])"
+    }
 }

@@ -26,6 +26,40 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        roadImageView.contentMode = .scaleAspectFill
+        startPosition = self.roadImageView.frame.origin
+        roadImageView.frame.origin = CGPoint(x: 0, y: 0)
+        obstacleView.frame.origin = self.startPosition
+        moveRoad()
+        createCar()
+        obstacleView.addSubview(carImageView)
+        view.addSubview(self.carImageView)
+        let arrayOfObstacleImageView: [UIImageView] = [
+            obstacle1ImageView, obstacle2ImageView, obstacle3ImageView, obstacle4ImageView
+        ]
+        arrayOfObstacleImageView.map { (imageView) in
+            imageView.image = UIImage(named: ViewController.user.userObstacleImageName)
+        }
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+            self.timeScore += 1
+        }
+        GameViewController.dateFormatter.dateStyle = .medium
+        GameViewController.dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
+        print(GameViewController.dateFormatter.string(from: Date()))
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let swipeLeftGesture = UISwipeGestureRecognizer()
+        swipeLeftGesture.addTarget(self, action: #selector(swipeToMove(_:)))
+        swipeLeftGesture.direction = .left
+        view.addGestureRecognizer(swipeLeftGesture)
+
+        let swipeRightGesture = UISwipeGestureRecognizer()
+        swipeRightGesture.addTarget(self, action: #selector(swipeToMove(_:)))
+        swipeRightGesture.direction = .right
+        view.addGestureRecognizer(swipeRightGesture)
+
         if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.userKey.rawValue) as? Data {
             do {
                 let user = try JSONDecoder().decode(User.self, from: data)
@@ -45,35 +79,14 @@ class GameViewController: UIViewController {
                                        userSpeedCar: 16)
             print("Not found user")
         }
-        print("\n\(ViewController.user.userName)")
-        print(ViewController.user.userCarImageName)
-        print(ViewController.user.userObstacleImageName)
-        print("\(ViewController.user.userSpeedCar) - 1 user")
+    }
 
-        roadImageView.contentMode = .scaleAspectFill
-        startPosition = self.roadImageView.frame.origin
-        roadImageView.frame.origin = CGPoint(x: 0, y: 0)
-        obstacleView.frame.origin = self.startPosition
-        moveRoad()
+    func createCar() {
         self.carImageView = UIImageView()
         self.carImageView.contentMode = .scaleAspectFit
         self.carImageView.image = UIImage(named: ViewController.user.userCarImageName)
-        self.carImageView.frame.origin = CGPoint(x: 150, y: 578)
+        self.carImageView.frame.origin = CGPoint(x: 150, y: view.frame.height - 260)
         self.carImageView.frame.size = CGSize(width: 103, height: 164)
-        obstacleView.addSubview(carImageView)
-        view.addSubview(self.carImageView)
-        let arrayOfObstacleImageView: [UIImageView] = [
-            obstacle1ImageView, obstacle2ImageView, obstacle3ImageView, obstacle4ImageView
-        ]
-        arrayOfObstacleImageView.map { (imageView) in
-            imageView.image = UIImage(named: ViewController.user.userObstacleImageName)
-        }
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-            self.timeScore += 1
-        }
-        GameViewController.dateFormatter.dateStyle = .medium
-        GameViewController.dateFormatter.setLocalizedDateFormatFromTemplate("MMM d, h:mm a")
-        print(GameViewController.dateFormatter.string(from: Date()))
     }
 
     func moveRoad() {
@@ -94,27 +107,23 @@ class GameViewController: UIViewController {
                 }
             }
         }
-    
+
         UIView.animate(withDuration: ViewController.user.userSpeedCar, delay: 0, options: [.curveLinear], animations: {
             self.roadImageView.frame.origin = self.view.frame.origin
             self.obstacleView.frame.origin = self.view.frame.origin
         }) { (result) in
             self.roadImageView.frame.origin = self.startPosition
             self.obstacleView.frame.origin = self.startPosition
-
-//            let arrayOfObstacleImageView: [UIImageView] = [
-//                self.obstacle1ImageView, self.obstacle2ImageView, self.obstacle3ImageView, self.obstacle4ImageView
-//            ]
-
-//            for obstacle in arrayOfObstacleImageView {
-//                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { (timerForChash) in
-//                    if self.carImageView.frame.intersects(obstacle.frame) {
-//                        self.backToMainView()
-//                    }
-//                }
-//            }
             self.moveRoad()
         }
+    }
+
+    @IBAction func moveToLeftButtonPressed(_ sender: Any) {
+        moveCarToLeft()
+    }
+
+    @IBAction func moveToRightButtonPressed(_ sender: Any) {
+        moveCarToRight()
     }
 
     func moveCarToLeft() {
@@ -140,10 +149,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    @IBAction func moveToLeftButtonPressed(_ sender: Any) {
-        moveCarToLeft()
-    }
-    
     func saveLastResult() {
         let newRecord = ResultGame(userName: ViewController.user.userName,
                                    time: GameViewController.dateFormatter.string(from: Date()),
@@ -158,7 +163,7 @@ class GameViewController: UIViewController {
             print(error)
         }
     }
-    
+
     func showGameOverVC() {
         saveLastResult()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -166,10 +171,6 @@ class GameViewController: UIViewController {
         let viewController = storyboard.instantiateViewController(identifier: nameController) as GameOverViewController
         viewController.modalPresentationStyle = .fullScreen
         navigationController?.pushViewController(viewController, animated: true)
-    }
-
-    @IBAction func moveToRightButtonPressed(_ sender: Any) {
-        moveCarToRight()
     }
 
     func backToMainView() {
@@ -186,5 +187,14 @@ class GameViewController: UIViewController {
             print(error)
         }
         navigationController?.popViewController(animated: true)
+    }
+
+    @objc func swipeToMove(_ swipeGesture: UISwipeGestureRecognizer) {
+        switch swipeGesture.direction {
+        case .left: moveCarToLeft()
+        case .right: moveCarToRight()
+        default:
+            print("")
+        }
     }
 }
