@@ -10,16 +10,19 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var moveToLeftButton: UIButton!
+    @IBOutlet weak var moveToRightButton: UIButton!
+    @IBOutlet weak var roadImageView: UIImageView!
+
     static let dateFormatter = DateFormatter()
     var startPosition = CGPoint(x: 0, y: 0)
     var carImageView: UIImageView!
     var timeScore = 0
     let obstacle = UIImageView()
     var stopFlag = true
-
-    @IBOutlet weak var moveToLeftButton: UIButton!
-    @IBOutlet weak var moveToRightButton: UIButton!
-    @IBOutlet weak var roadImageView: UIImageView!
+    var animateBarrier = Timer()
+    var timerForCrash = Timer()
+    var scoreTimer = Timer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,14 +32,14 @@ class GameViewController: UIViewController {
                 ViewController.user = user
             } catch {
                 print(error)
-                ViewController.user = User(userName: "Default name",
+                ViewController.user = User(userName: "Gamer",
                                            userObstacleImageName: "stub-image",
                                            userCarImageName: "red-car-image",
                                            userSpeedCar: 16)
                 print("Not found user")
             }
         } else {
-            ViewController.user = User(userName: "Default name",
+            ViewController.user = User(userName: "Gamer",
                                        userObstacleImageName: "stub-image",
                                        userCarImageName: "red-car-image",
                                        userSpeedCar: 16)
@@ -47,9 +50,9 @@ class GameViewController: UIViewController {
         roadImageView.frame.origin = CGPoint(x: 0, y: 0)
         moveRoad()
         createCar()
-        roadImageView.addSubview(carImageView)
-        view.addSubview(self.carImageView)
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+//        roadImageView.addSubview(carImageView)
+        view.addSubview(carImageView)
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (scoreTimer) in
             self.timeScore += 1
         }
         GameViewController.dateFormatter.dateStyle = .medium
@@ -75,6 +78,20 @@ class GameViewController: UIViewController {
         view.addSubview(obstacle)
         view.bringSubviewToFront(carImageView)
         animateObstacle()
+        checkCrash()
+    }
+
+    func checkCrash() {
+        timerForCrash = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { (timerForCrash) in
+//            self.crash()
+            if self.carImageView.frame.intersects(self.obstacle.frame) {
+                self.stopFlag = false
+                timerForCrash.invalidate()
+                self.animateBarrier.invalidate()
+                self.scoreTimer.invalidate()
+                self.showGameOverVC()
+            }
+        })
     }
 
     func animateObstacle() {
@@ -86,7 +103,7 @@ class GameViewController: UIViewController {
                     self.animateObstacle()
                 } else {
                     self.obstacle.center = CGPoint(x: self.view.frame.width / .random(in: 1...4), y: -180)
-                    Timer.scheduledTimer(withTimeInterval: .random(in: 1...3), repeats: false) { (timerForAnimateBarrier) in
+                    Timer.scheduledTimer(withTimeInterval: .random(in: 1...3), repeats: false) { (animateBarrier) in
                         self.animateObstacle()
                     }
                 }
@@ -125,6 +142,7 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             self.carImageView.center.x -= 10
             if self.carImageView.frame.origin.x == -20 {
+                self.stopFlag = false
                 self.showGameOverVC()
             }
         }) { (_) in
@@ -137,6 +155,7 @@ class GameViewController: UIViewController {
             self.carImageView.center.x += 10
             if (self.carImageView.frame.origin.x + self.carImageView.frame.width > self.view.frame.width) &&
                 (self.carImageView.frame.origin.x + self.carImageView.frame.width < self.view.frame.width + 10) {
+                self.stopFlag = false
                 self.showGameOverVC()
             }
         }) { (_) in
