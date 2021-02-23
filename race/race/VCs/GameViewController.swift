@@ -14,6 +14,8 @@ class GameViewController: UIViewController {
     var startPosition = CGPoint(x: 0, y: 0)
     var carImageView: UIImageView!
     var timeScore = 0
+    let obstacle = UIImageView()
+    var stopFlag = true
 
     @IBOutlet weak var moveToLeftButton: UIButton!
     @IBOutlet weak var moveToRightButton: UIButton!
@@ -66,13 +68,39 @@ class GameViewController: UIViewController {
         swipeRightGesture.addTarget(self, action: #selector(swipeToMove(_:)))
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
+
+        obstacle.image = UIImage(named: ViewController.user.userObstacleImageName)
+        obstacle.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        obstacle.center = CGPoint(x: view.frame.width / .random(in: 1...3), y: 0)
+        view.addSubview(obstacle)
+        view.bringSubviewToFront(carImageView)
+        animateObstacle()
+    }
+
+    func animateObstacle() {
+        if stopFlag == true {
+            UIView.animate(withDuration: 0.1, delay: 0, animations: {
+                self.obstacle.frame.origin.y += 25
+            }) { (result) in
+                if self.obstacle.frame.origin.y <= self.view.frame.height {
+                    self.animateObstacle()
+                } else {
+                    self.obstacle.center = CGPoint(x: self.view.frame.width / .random(in: 1...4), y: -180)
+                    Timer.scheduledTimer(withTimeInterval: .random(in: 1...3), repeats: false) { (timerForAnimateBarrier) in
+                        self.animateObstacle()
+                    }
+                }
+            }
+        } else {
+            return
+        }
     }
 
     func createCar() {
         self.carImageView = UIImageView()
         self.carImageView.contentMode = .scaleAspectFit
         self.carImageView.image = UIImage(named: ViewController.user.userCarImageName)
-        self.carImageView.frame.origin = CGPoint(x: 150, y: view.frame.height - 260)
+        self.carImageView.frame.origin = CGPoint(x: 130, y: view.frame.height - 260)
         self.carImageView.frame.size = CGSize(width: 103, height: 164)
     }
 
