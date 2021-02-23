@@ -26,6 +26,25 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.userKey.rawValue) as? Data {
+            do {
+                let user = try JSONDecoder().decode(User.self, from: data)
+                ViewController.user = user
+            } catch {
+                print(error)
+                ViewController.user = User(userName: "Default name",
+                                           userObstacleImageName: "stub-image",
+                                           userCarImageName: "red-car-image",
+                                           userSpeedCar: 16)
+                print("Not found user")
+            }
+        } else {
+            ViewController.user = User(userName: "Default name",
+                                       userObstacleImageName: "stub-image",
+                                       userCarImageName: "red-car-image",
+                                       userSpeedCar: 16)
+            print("Not found user")
+        }
         roadImageView.contentMode = .scaleAspectFill
         startPosition = self.roadImageView.frame.origin
         roadImageView.frame.origin = CGPoint(x: 0, y: 0)
@@ -60,25 +79,7 @@ class GameViewController: UIViewController {
         swipeRightGesture.direction = .right
         view.addGestureRecognizer(swipeRightGesture)
 
-        if let data = UserDefaults.standard.value(forKey: UserDefaultsKeys.userKey.rawValue) as? Data {
-            do {
-                let user = try JSONDecoder().decode(User.self, from: data)
-                ViewController.user = user
-            } catch {
-                print(error)
-                ViewController.user = User(userName: "Default name",
-                                           userObstacleImageName: "stub-image",
-                                           userCarImageName: "red-car-image",
-                                           userSpeedCar: 16)
-                print("Not found user")
-            }
-        } else {
-            ViewController.user = User(userName: "Default name",
-                                       userObstacleImageName: "stub-image",
-                                       userCarImageName: "red-car-image",
-                                       userSpeedCar: 16)
-            print("Not found user")
-        }
+        
     }
 
     func createCar() {
