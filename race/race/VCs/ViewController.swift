@@ -42,12 +42,6 @@ class ViewController: UIViewController {
 
         highScorebutton.backgroundColor = .white
         highScorebutton.layer.cornerRadius = highScorebutton.frame.height / 2
-        view.bringSubviewToFront(buttonsView)
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         startButton.getGradient(colors: [#colorLiteral(red: 1, green: 0.5643388629, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 0.397720933, green: 0.6568412781, blue: 0.9055325985, alpha: 1).cgColor],
                                 startPoint: CGPoint(x: 0.5, y: 0),
                                 endPoint: CGPoint(x: 0.5, y: 1))
@@ -57,6 +51,12 @@ class ViewController: UIViewController {
         highScorebutton.getGradient(colors: [#colorLiteral(red: 1, green: 0.5643388629, blue: 1, alpha: 1).cgColor, #colorLiteral(red: 0.397720933, green: 0.6568412781, blue: 0.9055325985, alpha: 1).cgColor],
                                     startPoint: CGPoint(x: 0.5, y: 0),
                                     endPoint: CGPoint(x: 0.5, y: 1))
+        view.bringSubviewToFront(buttonsView)
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: true)
     }
 

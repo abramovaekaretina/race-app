@@ -328,28 +328,6 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="road-image" translatesAutoresizingMaskIntoConstraints="NO" id="vGu-da-QRb">
                                 <rect key="frame" x="0.0" y="-1892" width="414" height="2790"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHe-n1-boc">
-                                <rect key="frame" x="0.0" y="880" width="414" height="2790"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stub-image" translatesAutoresizingMaskIntoConstraints="NO" id="7gY-Je-EPu">
-                                        <rect key="frame" x="325" y="1020" width="70" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stub-image" translatesAutoresizingMaskIntoConstraints="NO" id="igt-xC-C9R">
-                                        <rect key="frame" x="110" y="1800" width="70" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stub-image" translatesAutoresizingMaskIntoConstraints="NO" id="3Yg-35-weZ">
-                                        <rect key="frame" x="320" y="3094" width="70" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="stub-image" translatesAutoresizingMaskIntoConstraints="NO" id="FOD-Ib-mMd">
-                                        <rect key="frame" x="60" y="1092" width="70" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                </subviews>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Khb-iF-7xs">
                                 <rect key="frame" x="87" y="757" width="240" height="100"/>
                                 <subviews>
